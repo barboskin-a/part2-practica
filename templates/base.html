@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Design.pro{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Главная</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url '#' %}">Мои заявки</a></li>
+                    <li><a href="{% url '#' %}">Создать заявку</a></li>
+                    <li>
+                        <form method="post" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Выйти</button>
+                        </form></li>
+                    <li>
+                        <a href="{% url '#' %}" class="#" >Профиль</a>
+                        <ul class="dropdown">
+                            {% if user.is_staff %}
+                                <li><a href="{% url '#' %}">Управление категориями</a></li>
+                            {% endif %}
+                            <li><a href="#">Мой аккаунт</a></li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Войти</a></li>
+                    <li><a href="{% url 'signup' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

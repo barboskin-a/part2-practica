@@ -13,18 +13,18 @@
             <ul>
                 <li><a href="{% url 'home' %}">Главная</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url '#' %}">Мои заявки</a></li>
-                    <li><a href="{% url '#' %}">Создать заявку</a></li>
+                    <li><a href="{% url 'my_requests' %}">Мои заявки</a></li>
+                    <li><a href="{% url 'create_request' %}">Создать заявку</a></li>
                     <li>
                         <form method="post" action="{% url 'logout' %}">
                         {% csrf_token %}
                             <button type="submit" class="btn btn-danger">Выйти</button>
                         </form></li>
                     <li>
-                        <a href="{% url '#' %}" class="#" >Профиль</a>
+                        <a href="{% url '#' %}" class="profile-dropdown" >Профиль</a>
                         <ul class="dropdown">
                             {% if user.is_staff %}
-                                <li><a href="{% url '#' %}">Управление категориями</a></li>
+                                <li><a href="{% url 'manage_categories' %}">Управление категориями</a></li>
                             {% endif %}
                             <li><a href="#">Мой аккаунт</a></li>
                         </ul>
@@ -42,3 +42,4 @@
     </main>
 </body>
 </html>
+

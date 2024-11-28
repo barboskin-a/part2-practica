@@ -40,3 +40,4 @@ def create_request(request):
     else:
         form = RequestForm()
     return render(request, 'create_request.html', {'form': form})
+

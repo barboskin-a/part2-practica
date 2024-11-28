@@ -20,3 +20,21 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+@login_required
+def my_requests(request):
+    user_requests = Request.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'my_requests.html', {'requests': user_requests})
+
+@login_required
+def create_request(request):
+    if request.method == 'POST':
+        form = RequestForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_request = form.save(commit=False)
+            new_request.user = request.user
+            new_request.save()
+            return redirect('my_requests')
+    else:
+        form = RequestForm()
+    return render(request, 'create_request.html', {'form': form})

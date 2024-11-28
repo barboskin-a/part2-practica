@@ -12,3 +12,11 @@ class RequestForm(forms.ModelForm):
             'category': forms.Select(attrs={'class': 'form-control'}), #выпадающий список
             'image': forms.ClearableFileInput(attrs={'class': 'form-control'}), #для загрузки фото
         }
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name'] #из модели вкл в форму
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Название категории'}), #поле ввода
+        }

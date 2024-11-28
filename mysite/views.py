@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Request
+from .forms import RequestForm
 
 def home(request):
     completed_requests = Request.objects.filter(status='completed').order_by('-created_at')[:4]

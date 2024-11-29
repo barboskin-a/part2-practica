@@ -26,7 +26,7 @@
                         <a href="{% url 'change_request_status' request_obj.id %}" class="btn btn-primary">Изменить статус</a>
                     {% endif %}
                     {% if request_obj.status == 'new' %}
-                        <a href="#" class="btn btn-danger">Удалить</a>
+                        <a href="#" class="btn btn-danger-del">Удалить</a>
                     {% endif %}
                 </td>
             </tr>
@@ -38,3 +38,4 @@
     </tbody>
 </table>
 {% endblock %}
+

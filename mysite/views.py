@@ -54,6 +54,7 @@ def create_request(request):
         form = RequestForm()
     return render(request, 'create_request.html', {'form': form})
 
+
 #получает данных о всех категориях
 @staff_member_required
 def manage_categories(request):

@@ -13,10 +13,10 @@
     <label for="status">Выберите новый статус:</label>
     <select name="status" id="status">
         {% if request_obj.status == 'new' %}
-            <option value="in_progress" {% if request_obj.status =='in_progress' %}selected{% endif %}>Принято в работу</option>
+            <option value="in_progress" {% if request_obj.status == 'in_progress' %}selected{% endif %}>Принято в работу</option>
         {% endif %}
         {% if request_obj.status == 'new' or request_obj.status == 'in_progress' %}
-            <option value="completed" {% if request_obj.status =='completed' %}selected{% endif %}>Выполнено</option>
+            <option value="completed" {% if request_obj.status == 'completed' %}selected{% endif %}>Выполнено</option>
         {% endif %}
     </select>
 

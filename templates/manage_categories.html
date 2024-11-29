@@ -3,7 +3,7 @@
 
 {% block content %}
 <h1>Управление категориями</h1>
-<a href="{% url 'add_category' %}">Добавить категори.</a>
+<a href="{% url 'add_category' %}">Добавить категорию</a>
 <table>
     <thead>
         <tr>
@@ -15,7 +15,7 @@
         {% for category in categories %}
             <tr>
                 <td>{{ category.name }}</td>
-                <td><a href="{% url 'delete_category' category.pk %}">Удалить</a> </td>
+                <td><a href="{% url 'delete_category'category.pk %}">Удалить</a> </td>
             </tr>
         {% empty %}
             <tr>

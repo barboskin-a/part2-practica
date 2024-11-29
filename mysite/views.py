@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Request
 from .forms import RequestForm
+from django.contrib.admin.views.decorators import staff_member_required
 
 def home(request):
     completed_requests = Request.objects.filter(status='completed').order_by('-created_at')[:4]
@@ -41,3 +42,21 @@ def create_request(request):
         form = RequestForm()
     return render(request, 'create_request.html', {'form': form})
 
+#получает данных о всех категориях
+@staff_member_required
+def manage_categories(request):
+    categories = Category.objects.all()
+    return render(request, 'manage_categories.html', {'categories': categories})
+
+
+#добавление категорий
+@staff_member_required
+def add_category(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():  #проверяет форму на валидность (правильность заполнения)
+            form.save()  #сохраняет форму
+            return redirect('manage_categories')
+    else:
+        form = CategoryForm()
+    return render(request, 'add_category.html', {'form': form})

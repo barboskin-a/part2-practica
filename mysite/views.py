@@ -78,10 +78,11 @@ def add_category(request):
 @staff_member_required
 def delete_category(request, pk):
     category = get_object_or_404(Category, pk=pk) #получает объект category, исп. перв-ый ключ pk
-    if request.method == 'POST': #проверка подтверждения удаления
-        category.delete() #удаление
-        return redirect('manage_categories') #возвращает на стр. управ категориями
-    return render(request, 'delete_category.html', {'category': category}) #отправляет данный
+    if request.method == 'POST':#проверка подтверждения удаления
+        category.delete()#удаление
+        return redirect('manage_categories')#возвращает на стр. управ категориями
+    return render(request, 'delete_category.html', {'category': category})#отправляет данный
+
 
 #изменение статуса заявки
 @staff_member_required

@@ -7,7 +7,7 @@
 <table>
     <thead>
         <tr>
-            <th>Название категории:</th>
+            <th>Название категории</th>
             <th>Действие</th>
         </tr>
     </thead>
@@ -15,12 +15,10 @@
         {% for category in categories %}
             <tr>
                 <td>{{ category.name }}</td>
-                <td><a href="{% url 'delete_category'category.pk %}">Удалить</a> </td>
+                <td><a href="{% url 'delete_category' category.pk %}">Удалить</a> </td>
             </tr>
         {% empty %}
-            <tr>
-                <td colspan="2">Категории отсутствуют.</td>
-            </tr>
+            <tr><td colspan="3">Категории отсутствуют.</td></tr>
         {% endfor %}
     </tbody>
 </table>

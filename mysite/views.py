@@ -106,3 +106,9 @@ def change_request_status(request, pk): #получает объект request, 
     return render(request, 'change_status.html', {
         'request_obj': request_obj
     })
+
+#управление заявками для админа
+@staff_member_required
+def manage_requests(request):
+    requests = Request.objects.all().order_by('-created_at')
+    return render(request, 'manage_requests.html', {'requests': requests})

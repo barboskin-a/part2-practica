@@ -21,7 +21,7 @@
                             <button type="submit" class="btn btn-danger">Выйти</button>
                         </form></li>
                     <li>
-                        <a href="{% url '#' %}" class="profile-dropdown" >Профиль</a>
+                        <a href="{% url 'profile' %}" class="profile-dropdown" >Профиль</a>
                         <ul class="dropdown">
                             {% if user.is_staff %}
                                 <li><a href="{% url 'manage_categories' %}">Управление категориями</a></li>
@@ -53,7 +53,7 @@
 }
 
 header {
-    background-color: #6a5acd;
+    background-color: #AB0278;
     padding: 10px 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -64,6 +64,7 @@ header nav ul {
     padding: 0;
     display: flex;
     align-items: center;
+
     gap: 20px;
 }
 
@@ -75,14 +76,15 @@ header nav ul li {
 header nav ul li a {
     text-decoration: none;
     color: white;
+    border-radius: 20px;
     font-weight: bold;
     padding: 8px 12px;
     transition: background-color 0.3s ease;
 }
 
 header nav ul li a:hover {
-    background-color: #483d8b;
-    border-radius: 4px;
+    background-color: #E31CA0;
+    border-radius: 20px;
 }
 
 main {
@@ -99,7 +101,7 @@ button {
     color: white;
     border: none;
     padding: 8px 12px;
-    border-radius: 4px;
+    border-radius: 15px;
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;

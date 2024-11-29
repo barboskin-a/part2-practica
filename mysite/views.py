@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Request
 from .forms import RequestForm
 from django.contrib.admin.views.decorators import staff_member_required
+from .models import Category
+from .forms import CategoryForm
+from django.shortcuts import get_object_or_404
 
 def home(request):
     completed_requests = Request.objects.filter(status='completed').order_by('-created_at')[:4]
@@ -19,16 +22,17 @@ def signup(request):
         if form.is_valid():
             form.save()
             return redirect('login')
-
     else:
         form = UserCreationForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+#принимает заявки
 @login_required
 def my_requests(request):
     user_requests = Request.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'my_requests.html', {'requests': user_requests})
 
+#создание заявок
 @login_required
 def create_request(request):
     if request.method == 'POST':
@@ -60,3 +64,12 @@ def add_category(request):
     else:
         form = CategoryForm()
     return render(request, 'add_category.html', {'form': form})
+
+#удаление категорий
+@staff_member_required
+def delete_category(request, pk):
+    category = get_object_or_404(Category, pk=pk) #получает объект category, исп. перв-ый ключ pk
+    if request.method == 'POST': #проверка подтверждения удаления
+        category.delete() #удаление
+        return redirect('manage_categories') #возвращает на стр. управ категориями
+    return render(request, 'delete_category.html', {'category': category}) #отправляет данный
